@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="en_array">
+        <item>@string/en_uudenvuodenpuhe</item>
+        <item>@string/en_maamme</item>
+        <item>@string/en_kalevala_1</item>
+        <item>@string/en_kalevala_18</item>
+        <item>@string/en_kalevala_kilpalaulanta</item>
+        <item>@string/en_taivas_niklas_hed</item>
+    </integer-array>
+
+    <integer-array name="fi_array">
+        <item>@string/fi_uudenvuodenpuhe</item>
+        <item>@string/fi_maamme</item>
+        <item>@string/fi_kalevala_1</item>
+        <item>@string/fi_kalevala_18</item>
+        <item>@string/fi_kalevala_kilpalaulanta</item>
+        <item>@string/fi_taivas_niklas_hed</item>
+    </integer-array>
+</resources>
