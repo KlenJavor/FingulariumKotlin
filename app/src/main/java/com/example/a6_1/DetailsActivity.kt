@@ -60,5 +60,13 @@ class DetailsActivity : AppCompatActivity() {
             this@DetailsActivity.startActivity(intent)
             //startActivity(intent);
         }
+
+        //writeButton aka quiz
+        writeButton.setOnClickListener {
+            val intent = Intent(this@DetailsActivity, LearnActivity::class.java)
+            intent.putExtra(MainActivity.EXTRA, i)
+            this@DetailsActivity.startActivity(intent)
+            startActivity(intent);
+        }
     }
 }

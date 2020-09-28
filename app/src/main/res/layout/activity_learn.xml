@@ -14,7 +14,7 @@
         android:paddingLeft="32dp"
         android:text="Heading"
         android:textColor="@color/thinfont"
-        android:textSize="24sp"
+        android:textSize="@dimen/heading_text_size"
         app:fontFamily="@font/montserrat_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
