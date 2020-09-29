@@ -22,25 +22,20 @@
                 android:id="@+id/questionText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="sans-serif"
-
                 android:text="@{game.currentQuestion.text}"
                 android:textColor="@color/boldfont"
-
                 android:textSize="@dimen/heading_text_size"
-
                 android:textStyle="bold"
                 android:typeface="normal"
                 app:fontFamily="@font/montserrat_light"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="What color is the Android mascot?"
 
                 android:layout_marginStart="@dimen/question_horizontal_margin"
-                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="@dimen/question_horizontal_margin"/>
 
             <View
@@ -60,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/question_horizontal_margin"
-                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="@dimen/question_horizontal_margin"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical"
