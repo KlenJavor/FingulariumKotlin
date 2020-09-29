@@ -21,12 +21,12 @@ class QuizActivity : AppCompatActivity() {
     // All questions must have four answers.  We'd want these to contain references to string
     // resources so we could internationalize. (Or better yet, don't define the questions in code...)
     private val questions: MutableList<Question> = mutableListOf(
-            Question(text = "What is Android Jetpack?",
-                    answers = listOf("All of these", "Tools", "Documentation", "Libraries")),
-            Question(text = "What is the base class for layouts?",
-                    answers = listOf("ViewGroup", "ViewSet", "ViewCollection", "ViewRoot")),
-            Question(text = "What layout do you use for complex screens?",
-                    answers = listOf("ConstraintLayout", "GridLayout", "LinearLayout", "FrameLayout")),
+            Question(text = "Maito",
+                    answers = listOf("Milk", "Tea", "Coffee", "Water")),
+            Question(text = "Puu",
+                    answers = listOf("Tree", "Toilet", "Free", "Head")),
+            Question(text = "Liha",
+                    answers = listOf("Meat", "Fat", "Gain weight", "Leg")),
             Question(text = "What do you use to push structured data into a layout?",
                     answers = listOf("Data binding", "Data pushing", "Set text", "An OnClick method")),
             Question(text = "What method do you use to inflate layouts in fragments?",
