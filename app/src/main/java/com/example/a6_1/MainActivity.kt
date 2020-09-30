@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
                 //android.R.layout.simple_list_item_1, //define specific layout for one item
                 R.layout.item_listview,
                 Singleton.instance.presidents)
+
         listview.onItemClickListener = OnItemClickListener { adapterView, view, i, l ->
             Log.d(TAG, "onItemClick($i)")
             val nextActivity = Intent(this@MainActivity, DetailsActivity::class.java)

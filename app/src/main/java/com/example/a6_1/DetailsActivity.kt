@@ -53,7 +53,7 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-//readButton
+        //readButton
         readButton.setOnClickListener {
             val intent = Intent(this@DetailsActivity, LearnActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
@@ -64,6 +64,14 @@ class DetailsActivity : AppCompatActivity() {
         //writeButton aka quiz
         writeButton.setOnClickListener {
             val intent = Intent(this@DetailsActivity, QuizActivity::class.java)
+            intent.putExtra(MainActivity.EXTRA, i)
+            this@DetailsActivity.startActivity(intent)
+            startActivity(intent);
+        }
+
+        //speak button aka full dictionary
+        speakButton.setOnClickListener {
+            val intent = Intent(this@DetailsActivity, RecyclerviewActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
             this@DetailsActivity.startActivity(intent)
             startActivity(intent);
