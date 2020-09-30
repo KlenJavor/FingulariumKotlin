@@ -1,4 +1,4 @@
-package com.example.a6_1
+package com.example.a6_1.Activities
 
 
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import com.example.a6_1.R
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 class QuizActivity : AppCompatActivity() {

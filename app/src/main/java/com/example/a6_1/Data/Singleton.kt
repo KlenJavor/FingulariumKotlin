@@ -1,5 +1,6 @@
-package com.example.a6_1
+package com.example.a6_1.Data
 
+import com.example.a6_1.Item
 import java.util.*
 
 /**

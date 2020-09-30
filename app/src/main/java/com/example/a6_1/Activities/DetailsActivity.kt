@@ -1,4 +1,4 @@
-package com.example.a6_1
+package com.example.a6_1.Activities
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -7,7 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.a6_1.LearnActivity
+import com.example.a6_1.*
+import com.example.a6_1.Data.Singleton
 
 /**
  * @Details sends information to the activity_details.xml

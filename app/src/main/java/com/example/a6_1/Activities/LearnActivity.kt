@@ -1,4 +1,4 @@
-package com.example.a6_1
+package com.example.a6_1.Activities
 
 import android.app.Activity
 import android.media.MediaPlayer
@@ -9,7 +9,8 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.a6_1.LearnActivity
+import com.example.a6_1.R
+import com.example.a6_1.Data.Singleton
 
 class LearnActivity : AppCompatActivity() {
     //public static final String KEY_SCROLL = "scrollPosition";
