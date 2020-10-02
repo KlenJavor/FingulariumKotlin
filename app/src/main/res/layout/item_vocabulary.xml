@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView
         android:id="@+id/english_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/text_in_english"
         android:textColor="@color/thinfont"
-        android:textSize="16dp"
-        android:fontFamily="@font/montserrat_light"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:gravity="center"
-        />
+        android:textSize="24sp"
+        app:fontFamily="@font/montserrat_light" />
 
     <TextView
         android:id="@+id/finnish_txt"
-        android:layout_width="123dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:gravity="center"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:text="@string/text_in_finnish"
         android:textColor="@color/thinfont"
-        android:textSize="16dp" />
+        android:textSize="16sp"
+        app:fontFamily="@font/montserrat_light" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="4dp"
+        android:background="@color/icon" />
 
 </LinearLayout>

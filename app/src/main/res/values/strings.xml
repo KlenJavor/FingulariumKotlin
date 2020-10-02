@@ -2,4 +2,6 @@
     <string name="app_name">Fingularium</string>
     <string name="submit_button">OK</string>
     <string name="title_android_trivia_question">Android Trivia (%1$d/%2$d)</string>
+    <string name="text_in_english">Text in English</string>
+    <string name="text_in_finnish">Text in Finnish</string>
 </resources>
