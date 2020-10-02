@@ -12,17 +12,17 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name="com.example.fingularium.Activities.MainActivity">
+        <activity android:name="com.example.fingularium.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.fingularium.Activities.DetailsActivity"
-            android:parentActivityName="com.example.fingularium.Activities.MainActivity"></activity>
-        <activity android:label="@string/app_name" android:name="com.example.fingularium.Activities.LearnActivity"/>
-        <activity android:label="@string/app_name" android:name="com.example.fingularium.Activities.QuizActivity"/>
+        <activity android:name="com.example.fingularium.activities.DetailsActivity"
+            android:parentActivityName="com.example.fingularium.activities.MainActivity"></activity>
+        <activity android:label="@string/app_name" android:name="com.example.fingularium.activities.LearnActivity"/>
+        <activity android:label="@string/app_name" android:name="com.example.fingularium.activities.QuizActivity"/>
         <activity android:label="@string/app_name" android:name="com.example.fingularium.VocabularyActivity"/>
     </application>
 

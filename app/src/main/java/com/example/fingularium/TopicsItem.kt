@@ -3,7 +3,7 @@ package com.example.fingularium
 /**
  * Class has the constructor and getters to get info about a president
  */
-class Item//this.engText = engtext; //private int audioStartPosition;
+class TopicsItem//this.engText = engtext; //private int audioStartPosition;
 (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, //public String getEngText() { return engText; }
         //private String engText;
  val audio: String) {

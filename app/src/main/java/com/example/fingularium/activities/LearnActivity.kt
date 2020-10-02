@@ -1,4 +1,4 @@
-package com.example.fingularium.Activities
+package com.example.fingularium.activities
 
 import android.app.Activity
 import android.media.MediaPlayer
@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fingularium.R
-import com.example.fingularium.Data.Singleton
+import com.example.fingularium.data.TopicsSingleton
 
 class LearnActivity : AppCompatActivity() {
     //public static final String KEY_SCROLL = "scrollPosition";
@@ -27,7 +27,7 @@ class LearnActivity : AppCompatActivity() {
         val i = c?.getInt(MainActivity.EXTRA, 0) ?: 0
 
         //Load song to media player
-        val resId = resources.getIdentifier(Singleton.instance.getPresident(i).audio, "raw", packageName)
+        val resId = resources.getIdentifier(TopicsSingleton.getTopic(i).audio, "raw", packageName)
         mediaPlayer = MediaPlayer.create(this@LearnActivity, resId)
         mediaPlayer?.setLooping(false)
 
@@ -42,7 +42,7 @@ class LearnActivity : AppCompatActivity() {
         //Populate text views
         //https://stackoverflow.com/questions/6945678/storing-r-drawable-ids-in-xml-array
         //File title
-        (findViewById<View>(R.id.headingTextView) as TextView).setText(Singleton.instance.getPresident(i).getTitle())
+        (findViewById<View>(R.id.headingTextView) as TextView).setText(TopicsSingleton.getTopic(i).getTitle())
         //English Text
         (findViewById<View>(R.id.enTextView) as TextView).movementMethod = ScrollingMovementMethod()
         val enArray = resources.obtainTypedArray(R.array.en_array)
@@ -72,11 +72,11 @@ class LearnActivity : AppCompatActivity() {
 
                 //this should be set to look up the song and time from shared preferences
                 val prefGet = getSharedPreferences("PlayerAndScrollState", Activity.MODE_PRIVATE)
-                pauseCurrentPosition = prefGet.getInt(Singleton.instance.getPresident(i).audio.toString() + "_player", 0)
+                pauseCurrentPosition = prefGet.getInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", 0)
                 Log.d("testi", Integer.toString(pauseCurrentPosition))
                 mediaPlayer?.seekTo(pauseCurrentPosition)
                 mediaPlayer?.start()
-                Log.d("test1", Integer.toString(prefGet.getInt(Singleton.instance.getPresident(i).audio.toString() + "_player", 0)))
+                Log.d("test1", Integer.toString(prefGet.getInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", 0)))
             } else if (mediaPlayer!!.isPlaying) {
                 mediaPlayer!!.pause()
                 play.setImageResource(android.R.drawable.ic_media_play)
@@ -89,17 +89,17 @@ class LearnActivity : AppCompatActivity() {
                 //3. Put the key value pairs
                 pauseCurrentPosition = mediaPlayer!!.currentPosition
                 Log.d("test2", Integer.toString(mediaPlayer!!.currentPosition))
-                prefEditor.putInt(Singleton.instance.getPresident(i).audio.toString() + "_player", pauseCurrentPosition)
+                prefEditor.putInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", pauseCurrentPosition)
 
                 //4. Save the changes by commit
                 prefEditor.commit()
             } else {
                 val prefGet = getSharedPreferences("PlayerAndScrollState", Activity.MODE_PRIVATE)
-                pauseCurrentPosition = prefGet.getInt(Singleton.instance.getPresident(i).audio.toString() + "_player", 0)
+                pauseCurrentPosition = prefGet.getInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", 0)
                 mediaPlayer!!.seekTo(pauseCurrentPosition)
                 mediaPlayer!!.start()
                 play.setImageResource(android.R.drawable.ic_media_pause)
-                Log.d("test3", Integer.toString(prefGet.getInt(Singleton.instance.getPresident(i).audio.toString() + "_player", 0)))
+                Log.d("test3", Integer.toString(prefGet.getInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", 0)))
             }
         }
     }
@@ -130,7 +130,7 @@ class LearnActivity : AppCompatActivity() {
             //2. Open the editor to be able to define what is added to shared preferences
             val prefEditor = prefPut.edit()
             //3. Put the key value pairs
-            prefEditor.putInt(Singleton.instance.getPresident(i).audio.toString() + "_player", mediaPlayer!!.currentPosition)
+            prefEditor.putInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", mediaPlayer!!.currentPosition)
             //4. Save the changes by commit
             prefEditor.commit()
         }
@@ -147,7 +147,7 @@ class LearnActivity : AppCompatActivity() {
         val c = intent.extras
         val i = c!!.getInt(MainActivity.EXTRA, 0)
         val prefGet = getSharedPreferences("PlayerAndScrollState", Activity.MODE_PRIVATE)
-        outState.putInt(Singleton.instance.getPresident(i).audio.toString() + "_player", mediaPlayer!!.currentPosition)
+        outState.putInt(TopicsSingleton.getTopic(i).audio.toString() + "_player", mediaPlayer!!.currentPosition)
         outState.putBoolean(KEY_PLAYING, mediaPlayer!!.isPlaying)
     }
 

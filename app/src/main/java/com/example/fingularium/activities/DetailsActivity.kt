@@ -1,4 +1,4 @@
-package com.example.fingularium.Activities
+package com.example.fingularium.activities
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fingularium.*
-import com.example.fingularium.Data.Singleton
+import com.example.fingularium.data.TopicsSingleton
 
 /**
  * @Details sends information to the activity_details.xml
@@ -30,18 +30,18 @@ class DetailsActivity : AppCompatActivity() {
         val b = intent.extras
         val i = b!!.getInt(MainActivity.EXTRA, 0)
         (findViewById<View>(R.id.nameTextView) as TextView)
-                .setText(Singleton.instance.getPresident(i).fiName)
+                .setText(TopicsSingleton.getTopic(i).fiName)
         //((TextView) findViewById(R.id.startTextView))
         //       .setText(Singleton.getInstance().getPresident(i).getLenght());
         //((TextView) findViewById(R.id.endTextView))
         //      .setText(Singleton.getInstance().getPresident(i).getChapters());
         (findViewById<View>(R.id.nicknameTextView) as TextView)
-                .setText(Singleton.instance.getPresident(i).enName)
+                .setText(TopicsSingleton.getTopic(i).enName)
 
 //listenButton
         listenButton.setOnClickListener {
             if (mediaPlayer == null) {
-                val resId = resources.getIdentifier(Singleton.instance.getPresident(i).audio, "raw", packageName)
+                val resId = resources.getIdentifier(TopicsSingleton.getTopic(i).audio, "raw", packageName)
                 mediaPlayer = MediaPlayer.create(this@DetailsActivity, resId)
                 mediaPlayer?.start()
                 //this should be set to look up the song and time from shared preferences

@@ -1,4 +1,4 @@
-package com.example.fingularium.Activities
+package com.example.fingularium.activities
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -8,9 +8,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fingularium.Item
+import com.example.fingularium.TopicsItem
 import com.example.fingularium.R
-import com.example.fingularium.Data.Singleton
+import com.example.fingularium.data.TopicsSingleton
 
 class MainActivity : AppCompatActivity() {
     var mediaPlayer: MediaPlayer? = null
@@ -19,11 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val listview = findViewById<ListView>(R.id.itemListView)
-        listview.adapter = ArrayAdapter<Item>( //list of items we want to print
+        listview.adapter = ArrayAdapter<TopicsItem>( //list of items we want to print
                 this,  //contect in which activity we are
                 //android.R.layout.simple_list_item_1, //define specific layout for one item
-                R.layout.item_listview,
-                Singleton.instance.presidents)
+                R.layout.item_topics,
+                TopicsSingleton.topics)
 
         listview.onItemClickListener = OnItemClickListener { adapterView, view, i, l ->
             Log.d(TAG, "onItemClick($i)")

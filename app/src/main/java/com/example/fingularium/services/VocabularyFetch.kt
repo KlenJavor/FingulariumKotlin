@@ -1,4 +1,4 @@
-package com.example.fingularium.Services;
+package com.example.fingularium.services;
 
 import com.example.fingularium.Word
 import retrofit2.Retrofit;
