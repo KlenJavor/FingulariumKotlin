@@ -1,6 +1,6 @@
-package com.example.a6_1.Data
+package com.example.fingularium.Data
 
-import com.example.a6_1.Item
+import com.example.fingularium.Item
 import java.util.*
 
 /**

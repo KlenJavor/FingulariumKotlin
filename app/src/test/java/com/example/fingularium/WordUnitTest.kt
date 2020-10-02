@@ -1,4 +1,4 @@
-package com.example.a6_1
+package com.example.fingularium
 
 
 import org.junit.Assert.assertEquals

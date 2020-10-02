@@ -1,14 +1,14 @@
-package com.example.a6_1.Services;
+package com.example.fingularium.Services;
 
-import com.example.a6_1.Word
+import com.example.fingularium.Word
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
+import kotlinx.coroutines.Deferred
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val BASE_URL = "https://users.metropolia.fi/~patricsu"
+private const val BASE_URL = "https://users.metropolia.fi/~patricsu/Simple.json"
 
 private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -20,8 +20,8 @@ private val retrofit = Retrofit.Builder()
         .build()
 
 interface VocabularyService {
-    @GET("Finnish_words.json")
-    fun getWords(): Call<List<Word>>
+    @GET("Simple")
+     fun getWords(): Deferred<List<Word>>
 }
 
 

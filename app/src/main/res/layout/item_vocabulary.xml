@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
 android:layout_width="match_parent"
 android:layout_height="wrap_content">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/textView2"
+        android:id="@+id/english_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/thinfont"
@@ -19,5 +20,19 @@ android:layout_height="wrap_content">
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:gravity="center"
         />
+
+    <TextView
+        android:id="@+id/finnish_txt"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+        android:textColor="@color/thinfont"
+        android:textSize="16dp" />
 
 </LinearLayout>

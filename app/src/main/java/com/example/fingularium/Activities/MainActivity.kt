@@ -1,4 +1,4 @@
-package com.example.a6_1.Activities
+package com.example.fingularium.Activities
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -8,9 +8,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.a6_1.Item
-import com.example.a6_1.R
-import com.example.a6_1.Data.Singleton
+import com.example.fingularium.Item
+import com.example.fingularium.R
+import com.example.fingularium.Data.Singleton
 
 class MainActivity : AppCompatActivity() {
     var mediaPlayer: MediaPlayer? = null

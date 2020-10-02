@@ -1,3 +1,3 @@
-package com.example.a6_1
+package com.example.fingularium
 
 class MediaPlayerState(var position: Int)

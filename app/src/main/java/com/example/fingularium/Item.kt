@@ -1,7 +1,9 @@
-package com.example.a6_1
+package com.example.fingularium
 
-
-class RecyclerItem
+/**
+ * Class has the constructor and getters to get info about a president
+ */
+class Item//this.engText = engtext; //private int audioStartPosition;
 (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, //public String getEngText() { return engText; }
         //private String engText;
  val audio: String) {

@@ -1,4 +1,4 @@
-package com.example.a6_1.Activities
+package com.example.fingularium.Activities
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.a6_1.*
-import com.example.a6_1.Data.Singleton
+import com.example.fingularium.*
+import com.example.fingularium.Data.Singleton
 
 /**
  * @Details sends information to the activity_details.xml
@@ -72,7 +72,7 @@ class DetailsActivity : AppCompatActivity() {
 
         //speak button aka full dictionary
         speakButton.setOnClickListener {
-            val intent = Intent(this@DetailsActivity, RecyclerviewActivity::class.java)
+            val intent = Intent(this@DetailsActivity, VocabularyActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
             this@DetailsActivity.startActivity(intent)
             startActivity(intent);
