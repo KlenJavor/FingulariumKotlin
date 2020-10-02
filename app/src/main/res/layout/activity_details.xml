@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical">
-
-    <!--
-       <TextView
-           android:id="@+id/startTextView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="32dp"
-           android:text="start"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.3"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
-
-       <TextView
-           android:id="@+id/endTextView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="end"
-           app:layout_constraintBaseline_toBaselineOf="@+id/startTextView"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.7"
-           app:layout_constraintStart_toStartOf="parent" />
-   -->
 
     <TextView
         android:id="@+id/nameTextView"
@@ -40,7 +17,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:gravity="center"
-        android:text="Tasavallan presidentin uudenvuodenpuhe 2020"
+        android:text="@string/headingFI"
         android:textColor="@color/boldfont"
         android:textSize="20sp"
         app:fontFamily="@font/montserrat_regular"
@@ -59,7 +36,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:gravity="center"
-        android:text="President of the Republic Sauli Niinistö’s New Year’s Speech 2020"
+        android:text="@string/headingEN"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:fontFamily="@font/montserrat_regular"
@@ -117,4 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

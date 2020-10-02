@@ -4,4 +4,12 @@
     <string name="title_android_trivia_question">Android Trivia (%1$d/%2$d)</string>
     <string name="text_in_english">Text in English</string>
     <string name="text_in_finnish">Text in Finnish</string>
+    <string name="herra_hakkarainen">Herra Hakkarainen</string>
+    <string name="listen_read_speak_repeat">Listen, read, speak, repeat...</string>
+    <string name="headingFI">Tasavallan presidentin uudenvuodenpuhe 2020</string>
+    <string name="headingEN">President of the Republic Sauli Niinistö’s New Year’s Speech 2020</string>
+    <string name="play_button">Play Button</string>
+    <string name="current_time">03:13</string>
+    <string name="total_time">6:12</string>
 </resources>
+

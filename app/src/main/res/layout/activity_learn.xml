@@ -12,13 +12,15 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:paddingLeft="32dp"
-        android:text="Heading"
+        android:text="@string/heading"
         android:textColor="@color/thinfont"
         android:textSize="@dimen/heading_text_size"
         app:fontFamily="@font/montserrat_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingStart="32dp"
+        tools:ignore="RtlSymmetry" />
 
 
     <TextView
@@ -66,11 +68,11 @@
         android:id="@+id/readButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        android:contentDescription="@string/play_button" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -92,7 +94,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@string/current_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
@@ -103,27 +105,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="TextView"
+        android:text="@string/total_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar" />
-    <!--
-    <Button
-        android:id="@+id/pauseButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:drawable/ic_media_pause"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/readButton"
-        app:layout_constraintTop_toBottomOf="@+id/fiTextView" />
 
-    <Button
-        android:id="@+id/stopButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/readButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fiTextView" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
