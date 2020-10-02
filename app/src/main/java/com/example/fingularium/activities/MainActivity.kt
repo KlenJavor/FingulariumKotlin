@@ -8,7 +8,6 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fingularium.TopicsItem
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
 

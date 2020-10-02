@@ -1,4 +1,4 @@
-package com.example.fingularium
+package com.example.fingularium.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,11 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.retrofittest.MainViewModelFactory
+import com.example.fingularium.R
+import com.example.fingularium.VocabularyAdapter
+import com.example.fingularium.VocabularyRepository
+import com.example.fingularium.viewmodel.VocabularyViewModel
+import com.example.fingularium.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_vocabulary.*
 
 class VocabularyActivity : AppCompatActivity() {

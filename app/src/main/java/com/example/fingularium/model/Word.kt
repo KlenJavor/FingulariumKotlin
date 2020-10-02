@@ -1,4 +1,4 @@
-package com.example.fingularium
+package com.example.fingularium.model
 
 data class Word(val lang:String, val text:String) {
     private var translations = mutableSetOf<Word>()

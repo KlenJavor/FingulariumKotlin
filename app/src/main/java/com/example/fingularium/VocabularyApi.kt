@@ -1,5 +1,6 @@
 package com.example.fingularium
 
+import com.example.fingularium.model.Word
 import retrofit2.Response
 import retrofit2.http.*
 

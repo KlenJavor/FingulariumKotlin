@@ -1,7 +1,7 @@
-package com.example.fingularium
+package com.example.fingularium.activities
 
 /**
- * Class has the constructor and getters to get info about a president
+ * Class has the constructor and getters to get info about a topic
  */
 class TopicsItem//this.engText = engtext; //private int audioStartPosition;
 (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, //public String getEngText() { return engText; }

@@ -1,6 +1,6 @@
 package com.example.fingularium.services;
 
-import com.example.fingularium.Word
+import com.example.fingularium.model.Word
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import com.squareup.moshi.Moshi

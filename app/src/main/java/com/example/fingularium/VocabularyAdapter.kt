@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fingularium.model.Word
 import kotlinx.android.synthetic.main.item_vocabulary.view.*
 
 class VocabularyAdapter: RecyclerView.Adapter<VocabularyAdapter.MyViewHolder>(){

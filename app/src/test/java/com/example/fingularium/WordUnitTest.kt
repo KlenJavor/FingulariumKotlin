@@ -1,6 +1,7 @@
 package com.example.fingularium
 
 
+import com.example.fingularium.model.Word
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

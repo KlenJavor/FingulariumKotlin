@@ -1,8 +1,7 @@
-package com.example.retrofittest
+package com.example.fingularium.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.fingularium.VocabularyViewModel
 import com.example.fingularium.VocabularyRepository
 
 class MainViewModelFactory(private val repository: VocabularyRepository): ViewModelProvider.Factory {
