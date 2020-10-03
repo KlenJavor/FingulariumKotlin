@@ -1,16 +1,15 @@
 package com.example.fingularium.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fingularium.R
 import com.example.fingularium.VocabularyAdapter
 import com.example.fingularium.VocabularyRepository
-import com.example.fingularium.viewmodel.VocabularyViewModel
 import com.example.fingularium.viewmodel.MainViewModelFactory
+import com.example.fingularium.viewmodel.VocabularyViewModel
 import kotlinx.android.synthetic.main.activity_vocabulary.*
 
 class VocabularyActivity : AppCompatActivity() {
@@ -28,19 +27,17 @@ class VocabularyActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VocabularyViewModel::class.java)
         viewModel.getCustomPosts()
-        viewModel.myCustomPosts.observe(this, Observer { response ->
-            if(response.isSuccessful){
+        viewModel.myCustomPosts.observe(this, { response ->
+            if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setData(it) }
-            }else {
+            } else {
                 Toast.makeText(this, response.code(), Toast.LENGTH_SHORT).show()
             }
         })
-
     }
 
     private fun setupRecyclerview() {
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
-
 }

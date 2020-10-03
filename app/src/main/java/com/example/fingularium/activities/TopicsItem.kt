@@ -1,23 +1,22 @@
 package com.example.fingularium.activities
 
+import java.util.*
+
 /**
  * Class has the constructor and getters to get info about a topic
  */
-class TopicsItem//this.engText = engtext; //private int audioStartPosition;
-(private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, //public String getEngText() { return engText; }
-        //private String engText;
- val audio: String) {
+class TopicsItem (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, val audio: String) {
 
     fun getTitle(): String {
-        return title.toUpperCase()
+        return title.toUpperCase(Locale.ROOT)
     }
 
     fun getLenght(): String {
-        return Integer.toString(lenght)
+        return lenght.toString()
     }
 
     fun getChapters(): String {
-        return Integer.toString(chapters)
+        return chapters.toString()
     }
 
     override fun toString(): String {
