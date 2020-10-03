@@ -15,9 +15,11 @@ import com.example.fingularium.data.TopicsSingleton
  * MainActivity tells it which president to take  nextActivity.putExtra(EXTRA, i) -> getIntent().getExtras()
  * from the Singleton by Singleton.getInstance().getPresident(i). ...
  */
+
 class DetailsActivity : AppCompatActivity() {
-    var mediaPlayer: MediaPlayer? = null
-    var pauseCurrentPosition = 0
+    private var mediaPlayer: MediaPlayer? = null
+    private var pauseCurrentPosition = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -29,28 +31,30 @@ class DetailsActivity : AppCompatActivity() {
 //text views
         val b = intent.extras
         val i = b!!.getInt(MainActivity.EXTRA, 0)
-        (findViewById<View>(R.id.nameTextView) as TextView)
-                .setText(TopicsSingleton.getTopic(i).fiName)
+        (findViewById<View>(R.id.nameTextView) as TextView).text = TopicsSingleton.getTopic(i).fiName
         //((TextView) findViewById(R.id.startTextView))
         //       .setText(Singleton.getInstance().getPresident(i).getLenght());
         //((TextView) findViewById(R.id.endTextView))
         //      .setText(Singleton.getInstance().getPresident(i).getChapters());
-        (findViewById<View>(R.id.nicknameTextView) as TextView)
-                .setText(TopicsSingleton.getTopic(i).enName)
+        (findViewById<View>(R.id.nicknameTextView) as TextView).text = TopicsSingleton.getTopic(i).enName
 
 //listenButton
         listenButton.setOnClickListener {
-            if (mediaPlayer == null) {
-                val resId = resources.getIdentifier(TopicsSingleton.getTopic(i).audio, "raw", packageName)
-                mediaPlayer = MediaPlayer.create(this@DetailsActivity, resId)
-                mediaPlayer?.start()
-                //this should be set to look up the song and time from shared preferences
-            } else if (mediaPlayer!!.isPlaying) {
-                mediaPlayer!!.pause()
-                pauseCurrentPosition = mediaPlayer!!.currentPosition
-            } else {
-                mediaPlayer!!.seekTo(pauseCurrentPosition)
-                mediaPlayer!!.start()
+            when {
+                mediaPlayer == null -> {
+                    val resId = resources.getIdentifier(TopicsSingleton.getTopic(i).audio, "raw", packageName)
+                    mediaPlayer = MediaPlayer.create(this@DetailsActivity, resId)
+                    mediaPlayer?.start()
+                    //this should be set to look up the song and time from shared preferences
+                }
+                mediaPlayer!!.isPlaying -> {
+                    mediaPlayer!!.pause()
+                    pauseCurrentPosition = mediaPlayer!!.currentPosition
+                }
+                else -> {
+                    mediaPlayer!!.seekTo(pauseCurrentPosition)
+                    mediaPlayer!!.start()
+                }
             }
         }
 
@@ -67,7 +71,7 @@ class DetailsActivity : AppCompatActivity() {
             val intent = Intent(this@DetailsActivity, QuizActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
             this@DetailsActivity.startActivity(intent)
-            startActivity(intent);
+            startActivity(intent)
         }
 
         //speak button aka full dictionary
@@ -75,7 +79,7 @@ class DetailsActivity : AppCompatActivity() {
             val intent = Intent(this@DetailsActivity, VocabularyActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
             this@DetailsActivity.startActivity(intent)
-            startActivity(intent);
+            startActivity(intent)
         }
     }
 }

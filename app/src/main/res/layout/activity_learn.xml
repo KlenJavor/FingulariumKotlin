@@ -12,7 +12,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:paddingLeft="32dp"
-        android:text="@string/heading"
+        android:text="@string/headingFI"
         android:textColor="@color/thinfont"
         android:textSize="@dimen/heading_text_size"
         app:fontFamily="@font/montserrat_light"
