@@ -21,12 +21,18 @@ class QuizActivity : AppCompatActivity() {
             val text: String,
             val answers: List<String>)
 
+    data class Result(
+            val question: String,
+            val answers: String,
+            val passes: Int,
+            val fails: Int)
+
     private lateinit var viewModel: VocabularyViewModel
     var wordIndex: Int = 0
     var questionHeading = ""
-    var rightAnswer = ""
+    lateinit var rightAnswer: String
     lateinit var answers: MutableList<String>
-    private var questionIndex = 0
+    lateinit var results: MutableList<Result>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +78,20 @@ class QuizActivity : AppCompatActivity() {
                 // The first answer in the original question is always the correct one, so if our
                 // answer matches, we have the correct answer.
                 if (answers[answerIndex] == vocQuestion.answers[0]) {
-
-                    TODO("collect statistics about wins")
+                    // Give feedback
+                    textFeedback.text = "Correct!"
+                    // collect statistics about wins")
 
                     // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
                     setQuestion(vocQuestion)
 
                 } else {
+                    // Give feedback
+                    textFeedback.text = "Wrong\n Correct answer was: " + rightAnswer.take(170)
+                    // collect statistics about losses")
 
-                    TODO("collect statistics about losses")
+                    // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
                     setQuestion(vocQuestion)
                 }
@@ -127,7 +137,7 @@ class QuizActivity : AppCompatActivity() {
         fourthAnswerRadioButton.text = answers[3]
     }
 
-    fun buildQuestion(jsonVocabulary: List<List<Word>>?):Question {
+    fun buildQuestion(jsonVocabulary: List<List<Word>>?): Question {
         // 1. Pick a random word from the vocabulary
         if (jsonVocabulary != null) {
             wordIndex = (0..jsonVocabulary.size).shuffled().first()
@@ -142,5 +152,9 @@ class QuizActivity : AppCompatActivity() {
         var cropped = getClosestWord(wordIndex, jsonVocabulary)
         var vocQuestion = Question(text = questionHeading, answers = listOf(rightAnswer, cropped[0], cropped[1], cropped[2]))
         return vocQuestion
+    }
+
+    fun updateResults(){
+        
     }
 }

@@ -11,5 +11,6 @@
     <string name="play_button">Play Button</string>
     <string name="current_time">03:13</string>
     <string name="total_time">6:12</string>
+    <string name="statistics">Statistics</string>
 </resources>
 
