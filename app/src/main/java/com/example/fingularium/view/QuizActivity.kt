@@ -3,8 +3,8 @@ package com.example.fingularium.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
 import com.example.fingularium.VocabularyRepository
@@ -15,27 +15,18 @@ import kotlinx.android.synthetic.main.activity_quiz.*
 
 class QuizActivity : AppCompatActivity() {
 
+    // The first answer is the correct one.  We randomize the answers before showing the text.
+    // All questions must have four answers.
     data class Question(
             val text: String,
             val answers: List<String>)
 
-    // The first answer is the correct one.  We randomize the answers before showing the text.
-    // All questions must have four answers.  We'd want these to contain references to string
-    // resources so we could internationalize. (Or better yet, don't define the questions in code...)
-    private val questions: MutableList<Question> = mutableListOf(
-            Question(text = "Maito",
-                    answers = listOf("Milk", "Tea", "Coffee", "Water")),
-            Question(text = "Puu",
-                    answers = listOf("Tree", "Toilet", "Free", "Head")),
-            Question(text = "Liha",
-                    answers = listOf("Meat", "Fat", "Gain weight", "Leg"))
-    )
-
-    //NEW
     private lateinit var viewModel: VocabularyViewModel
     var wordIndex: Int = 0
-    var question = ""
+    var questionHeading = ""
     var rightAnswer = ""
+    lateinit var answers: MutableList<String>
+    private var questionIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +37,11 @@ class QuizActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VocabularyViewModel::class.java)
         viewModel.getCustomPosts()
-        viewModel.myVocabulary.observe(this, Observer { response ->
+        viewModel.myVocabulary.observe(this, { response ->
             if (response.isSuccessful) {
                 val jsonVocabulary = response.body()
-                playGame(jsonVocabulary)
                 Log.d("celej json", jsonVocabulary.toString())
-
+                playGame(jsonVocabulary)
             } else {
                 questionText.text = response.code().toString()
             }
@@ -59,57 +49,14 @@ class QuizActivity : AppCompatActivity() {
     }
 
     fun playGame(jsonVocabulary: List<List<Word>>?) {
-        // 1. Pick random word
-        wordIndex = (0..200).shuffled().first()
-        question = jsonVocabulary?.get(wordIndex)?.get(0)?.text ?: "chyba"
-        rightAnswer = jsonVocabulary?.get(wordIndex)?.get(1)?.text ?: "chyba"
 
-        // 2. Find alternative answers and build a question
-        // 2a Find 3 words that is very close to the original word
-        // 2b Get their answers
+        // 1. Build a question
+        var vocQuestion = buildQuestion(jsonVocabulary)
 
-        // 3. Display question
-        //questionText.text = jsonVocabulary[0][0].text
-        //firstAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
-        //secondAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
-        //thirdAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
-        //fourthAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
+        // 3. Set first question
+        setQuestion(vocQuestion)
 
-        // 4. Decide, if it was the right answer
-        // 5. Update statistics
-
-        // Display the desired data
-    }
-//OLD
-
-    /*
-    lateinit var currentQuestion: Question
-    lateinit var answers: MutableList<String>
-    private var questionIndex = 0
-    private val numQuestions = Math.min((questions.size + 1) / 2, 3)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
-        val submitButton = findViewById<Button>(R.id.submitButton)
-        val questionRadioGroup = findViewById<RadioGroup>(R.id.questionRadioGroup)
-        var questionText = findViewById<TextView>(R.id.questionText)
-        var firstAnswerRadioButton = findViewById<RadioButton>(R.id.firstAnswerRadioButton)
-        var secondAnswerRadioButton = findViewById<RadioButton>(R.id.secondAnswerRadioButton)
-        var thirdAnswerRadioButton = findViewById<RadioButton>(R.id.thirdAnswerRadioButton)
-        var fourthAnswerRadioButton = findViewById<RadioButton>(R.id.fourthAnswerRadioButton)
-
-
-        // Inflate the layout for this fragment
-
-
-        // Shuffles the questions and sets the question index to the first question.
-        randomizeQuestions()
-
-        // Bind this fragment class to the layout
-
-
+        // 4. Display question
         // Set the onClickListener for the submitButton
         submitButton.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
@@ -124,49 +71,76 @@ class QuizActivity : AppCompatActivity() {
                 }
                 // The first answer in the original question is always the correct one, so if our
                 // answer matches, we have the correct answer.
-                if (answers[answerIndex] == currentQuestion.answers[0]) {
-                    questionIndex++
+                if (answers[answerIndex] == vocQuestion.answers[0]) {
+
+                    TODO("collect statistics about wins")
+
                     // Advance to the next question
-                    if (questionIndex < numQuestions) {
-                        currentQuestion = questions[questionIndex]
-                        setQuestion()
+                    vocQuestion = buildQuestion(jsonVocabulary)
+                    setQuestion(vocQuestion)
 
-                    } else {
-                        // We've won!  Navigate to the gameWonFragment.
-                        submitButton.text = "Correct Take next!"
-
-                    }
                 } else {
-                    // Game over! A wrong answer sends us to the gameOverFragment.
-                    submitButton.text = "That was wrong. Try next!"
 
+                    TODO("collect statistics about losses")
+                    vocQuestion = buildQuestion(jsonVocabulary)
+                    setQuestion(vocQuestion)
                 }
+            } else {
+                // Game over! A wrong answer sends us to the gameOverFragment.
+                submitButton.text = "That was wrong. Try next!"
+            }
+        }
+    }
+
+    fun getClosestWord(wordIndex: Int, jsonVocabulary: List<List<Word>>?): MutableList<String> {
+        var distances: MutableMap<String, Int> = mutableMapOf()
+
+        if (jsonVocabulary != null) {
+            for (translation in jsonVocabulary) {
+                distances.put(translation[0].text, jsonVocabulary.get(wordIndex).get(0).editDistance(translation[0]))
             }
         }
 
+        // remove identical words and get 3 closest translations
+        var sorted = distances.toList().sortedBy { (_, value) -> value }.toMap()
+        var cleaned = sorted.filter { (key, value) -> value > 0 }
+        var cropped = mutableListOf<String>()
+        for (i in 0..2) {
+            cropped.add(cleaned.keys.elementAt(i))
+        }
+        if (jsonVocabulary != null) {
+            Log.d("otazka", jsonVocabulary.get(wordIndex).get(0).text)
+        }
+        Log.d("alternative answers", cropped.toString())
+        return cropped
     }
 
-    // randomize the questions and set the first question
-    private fun randomizeQuestions() {
-        questions.shuffle()
-        questionIndex = 0
-        setQuestion()
-    }
-
-    // Sets the question and randomizes the answers.  This only changes the data, not the UI.
-    // Calling invalidateAll on the FragmentGameBinding updates the data.
-    private fun setQuestion() {
-
-        currentQuestion = questions[questionIndex]
+    private fun setQuestion(vocQuestion: QuizActivity.Question) {
         // randomize the answers into a copy of the array
-        answers = currentQuestion.answers.toMutableList()
+        answers = vocQuestion.answers.toMutableList()
         // and shuffle them
         answers.shuffle()
-        questionText.text = currentQuestion.text
+        questionText.text = vocQuestion.text
         firstAnswerRadioButton.text = answers[0]
         secondAnswerRadioButton.text = answers[1]
         thirdAnswerRadioButton.text = answers[2]
         fourthAnswerRadioButton.text = answers[3]
+    }
 
-    }*/
+    fun buildQuestion(jsonVocabulary: List<List<Word>>?):Question {
+        // 1. Pick a random word from the vocabulary
+        if (jsonVocabulary != null) {
+            wordIndex = (0..jsonVocabulary.size).shuffled().first()
+            Log.d("wordIndex", wordIndex.toString())
+        }
+        questionHeading = jsonVocabulary?.get(wordIndex)?.get(1)?.text ?: "chyba"
+        rightAnswer = jsonVocabulary?.get(wordIndex)?.get(0)?.text ?: "chyba"
+        Log.d("question", questionHeading)
+        Log.d("right answer", rightAnswer)
+
+        // 2. Find alternative answers and build a question
+        var cropped = getClosestWord(wordIndex, jsonVocabulary)
+        var vocQuestion = Question(text = questionHeading, answers = listOf(rightAnswer, cropped[0], cropped[1], cropped[2]))
+        return vocQuestion
+    }
 }

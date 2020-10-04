@@ -6,17 +6,32 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat.getAction
+import androidx.core.view.accessibility.AccessibilityEventCompat.getAction
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
+import kotlinx.android.synthetic.main.activity_learn.*
 
 class LearnActivity : AppCompatActivity() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var pauseCurrentPosition = 0
+
+
+    // Listen to scrolling - synchronous scrolling - https://developer.android.com/training/graphics/opengl/touch
+    /*override        fun onTouchEvent(e: MotionEvent): Boolean {
+        when (e.action) {
+            MotionEvent.ACTION_MOVE -> {
+                enTextView.scrollTo(fiTextView.scrollX, fiTextView.scrollY)
+            }
+        }
+        return false
+    }*/
 
     @SuppressLint("Recycle")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +68,9 @@ class LearnActivity : AppCompatActivity() {
         (findViewById<View>(R.id.fiTextView) as TextView).movementMethod = ScrollingMovementMethod()
         val fiArray = resources.obtainTypedArray(R.array.fi_array)
         (findViewById<View>(R.id.fiTextView) as TextView).setText(fiArray.getResourceId(i, -1))
+
+
+
 
         play.setOnClickListener {
             Log.d("testi", "i= $i")
