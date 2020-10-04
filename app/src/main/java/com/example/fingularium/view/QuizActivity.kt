@@ -2,13 +2,15 @@ package com.example.fingularium.view
 
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
+import com.example.fingularium.VocabularyRepository
+import com.example.fingularium.model.Word
+import com.example.fingularium.viewmodel.MainViewModelFactory
+import com.example.fingularium.viewmodel.VocabularyViewModel
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 class QuizActivity : AppCompatActivity() {
@@ -26,24 +28,61 @@ class QuizActivity : AppCompatActivity() {
             Question(text = "Puu",
                     answers = listOf("Tree", "Toilet", "Free", "Head")),
             Question(text = "Liha",
-                    answers = listOf("Meat", "Fat", "Gain weight", "Leg")),
-            Question(text = "What do you use to push structured data into a layout?",
-                    answers = listOf("Data binding", "Data pushing", "Set text", "An OnClick method")),
-            Question(text = "What method do you use to inflate layouts in fragments?",
-                    answers = listOf("onCreateView()", "onActivityCreated()", "onCreateLayout()", "onInflateLayout()")),
-            Question(text = "What's the build system for Android?",
-                    answers = listOf("Gradle", "Graddle", "Grodle", "Groyle")),
-            Question(text = "Which class do you use to create a vector drawable?",
-                    answers = listOf("VectorDrawable", "AndroidVectorDrawable", "DrawableVector", "AndroidVector")),
-            Question(text = "Which one of these is an Android navigation component?",
-                    answers = listOf("NavController", "NavCentral", "NavMaster", "NavSwitcher")),
-            Question(text = "Which XML element lets you register an activity with the launcher activity?",
-                    answers = listOf("intent-filter", "app-registry", "launcher-registry", "app-launcher")),
-            Question(text = "What do you use to mark a layout for data binding?",
-                    answers = listOf("<layout>", "<binding>", "<data-binding>", "<dbinding>"))
+                    answers = listOf("Meat", "Fat", "Gain weight", "Leg"))
     )
 
+    //NEW
+    private lateinit var viewModel: VocabularyViewModel
+    var wordIndex: Int = 0
+    var question = ""
+    var rightAnswer = ""
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_quiz)
+
+        // Retrieve json vocabulary into local variable jsonVocabulary
+        val repository = VocabularyRepository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(VocabularyViewModel::class.java)
+        viewModel.getCustomPosts()
+        viewModel.myVocabulary.observe(this, Observer { response ->
+            if (response.isSuccessful) {
+                val jsonVocabulary = response.body()
+                playGame(jsonVocabulary)
+                Log.d("celej json", jsonVocabulary.toString())
+
+            } else {
+                questionText.text = response.code().toString()
+            }
+        })
+    }
+
+    fun playGame(jsonVocabulary: List<List<Word>>?) {
+        // 1. Pick random word
+        wordIndex = (0..200).shuffled().first()
+        question = jsonVocabulary?.get(wordIndex)?.get(0)?.text ?: "chyba"
+        rightAnswer = jsonVocabulary?.get(wordIndex)?.get(1)?.text ?: "chyba"
+
+        // 2. Find alternative answers and build a question
+        // 2a Find 3 words that is very close to the original word
+        // 2b Get their answers
+
+        // 3. Display question
+        //questionText.text = jsonVocabulary[0][0].text
+        //firstAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
+        //secondAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
+        //thirdAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
+        //fourthAnswerRadioButton.text = response.body()?.get(1)?.get(1)?.text ?:"chyba"
+
+        // 4. Decide, if it was the right answer
+        // 5. Update statistics
+
+        // Display the desired data
+    }
+//OLD
+
+    /*
     lateinit var currentQuestion: Question
     lateinit var answers: MutableList<String>
     private var questionIndex = 0
@@ -129,5 +168,5 @@ class QuizActivity : AppCompatActivity() {
         thirdAnswerRadioButton.text = answers[2]
         fourthAnswerRadioButton.text = answers[3]
 
-    }
+    }*/
 }
