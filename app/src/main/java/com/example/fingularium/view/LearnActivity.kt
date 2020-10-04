@@ -1,4 +1,4 @@
-package com.example.fingularium.activities
+package com.example.fingularium.view
 
 import android.annotation.SuppressLint
 import android.app.Activity

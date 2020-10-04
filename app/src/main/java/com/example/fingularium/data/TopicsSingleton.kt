@@ -1,6 +1,6 @@
 package com.example.fingularium.data
 
-import com.example.fingularium.activities.TopicsItem
+import com.example.fingularium.view.TopicsItem
 import java.util.*
 
 /**

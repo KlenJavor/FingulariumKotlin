@@ -8,20 +8,16 @@ import com.example.fingularium.model.Word
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
+// Contains mutable live data object which is used in the VocabularyActivity
+
 class VocabularyViewModel(private val repository: VocabularyRepository): ViewModel() {
 
-
-    var myCustomPosts: MutableLiveData<Response<List<List<Word>>>> = MutableLiveData()
-
-
+    var myVocabulary: MutableLiveData<Response<List<List<Word>>>> = MutableLiveData()
 
     fun getCustomPosts() {
         viewModelScope.launch {
             val response = repository.getCustomPosts()
-            myCustomPosts.value = response
+            myVocabulary.value = response
         }
     }
-
-
-
 }

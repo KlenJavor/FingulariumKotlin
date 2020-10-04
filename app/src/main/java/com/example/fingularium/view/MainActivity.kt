@@ -1,4 +1,4 @@
-package com.example.fingularium.activities
+package com.example.fingularium.view
 
 import android.content.Intent
 import android.os.Bundle

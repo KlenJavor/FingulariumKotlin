@@ -16,5 +16,4 @@ object VocabularyItem {
     val api: VocabularyApi by lazy {
         retrofit.create(VocabularyApi::class.java)
     }
-
 }

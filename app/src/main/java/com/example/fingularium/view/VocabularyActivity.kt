@@ -1,4 +1,4 @@
-package com.example.fingularium.activities
+package com.example.fingularium.view
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,11 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fingularium.R
-import com.example.fingularium.VocabularyAdapter
 import com.example.fingularium.VocabularyRepository
+import com.example.fingularium.adapters.VocabularyAdapter
 import com.example.fingularium.viewmodel.MainViewModelFactory
 import com.example.fingularium.viewmodel.VocabularyViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_vocabulary.*
+
+
+// Observes the value of live data and sets data in case a response is successful
 
 class VocabularyActivity : AppCompatActivity() {
 
@@ -27,9 +31,9 @@ class VocabularyActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VocabularyViewModel::class.java)
         viewModel.getCustomPosts()
-        viewModel.myCustomPosts.observe(this, { response ->
+        viewModel.myVocabulary.observe(this, { response ->
             if (response.isSuccessful) {
-                response.body()?.let { myAdapter.setData(it) }
+                response.body()?.let { myAdapter.setData(it) }  //This is the actual vocabulary
             } else {
                 Toast.makeText(this, response.code(), Toast.LENGTH_SHORT).show()
             }
