@@ -72,7 +72,6 @@ data class Word(val lang:String, val text:String) {
                 }
             }
         }
-        println("Distance between $string1 and $string2 is ${d[string1.length][string2.length]}")
         return d[string1.length][string2.length]
     }
 }

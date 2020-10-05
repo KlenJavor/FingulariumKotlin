@@ -6,16 +6,12 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat.getAction
-import androidx.core.view.accessibility.AccessibilityEventCompat.getAction
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
-import kotlinx.android.synthetic.main.activity_learn.*
 
 class LearnActivity : AppCompatActivity() {
 

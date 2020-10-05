@@ -1,9 +1,11 @@
 package com.example.fingularium.view
 
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
@@ -12,6 +14,7 @@ import com.example.fingularium.model.Word
 import com.example.fingularium.viewmodel.MainViewModelFactory
 import com.example.fingularium.viewmodel.VocabularyViewModel
 import kotlinx.android.synthetic.main.activity_quiz.*
+import java.util.*
 
 class QuizActivity : AppCompatActivity() {
 
@@ -21,18 +24,31 @@ class QuizActivity : AppCompatActivity() {
             val text: String,
             val answers: List<String>)
 
-    data class Result(
+   data class Result(
             val question: String,
             val answers: String,
             val passes: Int,
             val fails: Int)
+    {
+        override fun equals(other: Any?): Boolean {
+            if(this === other) return true
+            if(other == null || other.javaClass != this.javaClass) return false
+            val o = other as Result
+            return(this.question == o.question)
+        }
+        @RequiresApi(Build.VERSION_CODES.KITKAT)
+        override fun hashCode(): Int {
+            return Objects.hash(question)
+        }
+    }
 
     private lateinit var viewModel: VocabularyViewModel
     var wordIndex: Int = 0
     var questionHeading = ""
     lateinit var rightAnswer: String
     lateinit var answers: MutableList<String>
-    lateinit var results: MutableList<Result>
+    var results: MutableList<Result> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +62,6 @@ class QuizActivity : AppCompatActivity() {
         viewModel.myVocabulary.observe(this, { response ->
             if (response.isSuccessful) {
                 val jsonVocabulary = response.body()
-                Log.d("celej json", jsonVocabulary.toString())
                 playGame(jsonVocabulary)
             } else {
                 questionText.text = response.code().toString()
@@ -61,6 +76,7 @@ class QuizActivity : AppCompatActivity() {
 
         // 3. Set first question
         setQuestion(vocQuestion)
+        results.add(Result(questionHeading, rightAnswer, 0, 0))
 
         // 4. Display question
         // Set the onClickListener for the submitButton
@@ -81,6 +97,7 @@ class QuizActivity : AppCompatActivity() {
                     // Give feedback
                     textFeedback.text = "Correct!"
                     // collect statistics about wins")
+                    updateResults(questionHeading, rightAnswer, 1, 0)
 
                     // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
@@ -89,7 +106,9 @@ class QuizActivity : AppCompatActivity() {
                 } else {
                     // Give feedback
                     textFeedback.text = "Wrong\n Correct answer was: " + rightAnswer.take(170)
+
                     // collect statistics about losses")
+                    updateResults(questionHeading, rightAnswer, 0, 1)
 
                     // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
@@ -154,7 +173,23 @@ class QuizActivity : AppCompatActivity() {
         return vocQuestion
     }
 
-    fun updateResults(){
-        
+    fun updateResults(questionHeading: String, rightAnswer: String, passIncrease: Int, failIncrease: Int) {
+        // is Result with the sme question already in the list?
+        if (results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}  != null) {
+            // add passes or fails
+            val originalPasses = results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}!!.passes
+            val originalFails = results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}!!.fails
+            results.remove((Result(questionHeading, rightAnswer, 5, 0)))
+            val newPasses = originalPasses + passIncrease
+            val newFails = originalFails + failIncrease
+            results.add(Result(questionHeading, rightAnswer, newPasses, newFails))
+            Log.d("lookup", "result WAS found")
+
+        } else {
+            // add it
+            results.add(Result(questionHeading, rightAnswer, passIncrease, failIncrease))
+            Log.d("lookup", "result was not found")
+        }
+        Log.d("results", results.toString())
     }
 }

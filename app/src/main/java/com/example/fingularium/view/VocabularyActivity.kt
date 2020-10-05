@@ -10,7 +10,6 @@ import com.example.fingularium.VocabularyRepository
 import com.example.fingularium.adapters.VocabularyAdapter
 import com.example.fingularium.viewmodel.MainViewModelFactory
 import com.example.fingularium.viewmodel.VocabularyViewModel
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_vocabulary.*
 
 
