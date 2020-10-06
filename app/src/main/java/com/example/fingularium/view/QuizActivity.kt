@@ -46,11 +46,11 @@ class QuizActivity : AppCompatActivity() {
         })
 
 
-       statsButton.setOnClickListener {
-           val intent = Intent(this@QuizActivity, ResultsActivity::class.java)
-           intent.putExtra("stats", "results")
-           this@QuizActivity.startActivity(intent)
-           startActivity(intent)
+        statsButton.setOnClickListener {
+            val intent = Intent(this@QuizActivity, ResultsActivity::class.java)
+            intent.putExtra("stats", "results")
+            this@QuizActivity.startActivity(intent)
+            startActivity(intent)
         }
 
 
@@ -108,24 +108,24 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
-    fun getClosestWord(wordIndex: Int, jsonVocabulary: List<List<Word>>?): MutableList<String> {
-        var distances: MutableMap<String, Int> = mutableMapOf()
+    private fun getClosestWord(wordIndex: Int, jsonVocabulary: List<List<Word>>?): MutableList<String> {
+        val distances: MutableMap<String, Int> = mutableMapOf()
 
         if (jsonVocabulary != null) {
             for (translation in jsonVocabulary) {
-                distances[translation[0].text] = jsonVocabulary.get(wordIndex).get(0).editDistance(translation[0])
+                distances[translation[0].text] = jsonVocabulary[wordIndex][0].editDistance(translation[0])
             }
         }
 
         // remove identical words and get 3 closest translations
-        var sorted = distances.toList().sortedBy { (_, value) -> value }.toMap()
-        var cleaned = sorted.filter { (key, value) -> value > 0 }
-        var cropped = mutableListOf<String>()
+        val sorted = distances.toList().sortedBy { (_, value) -> value }.toMap()
+        val cleaned = sorted.filter { (_, value) -> value > 0 }
+        val cropped = mutableListOf<String>()
         for (i in 0..2) {
             cropped.add(cleaned.keys.elementAt(i))
         }
         if (jsonVocabulary != null) {
-            Log.d("otazka", jsonVocabulary[wordIndex].get(0).text)
+            Log.d("otazka", jsonVocabulary[wordIndex][0].text)
         }
         Log.d("alternative answers", cropped.toString())
         return cropped

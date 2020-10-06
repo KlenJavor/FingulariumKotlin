@@ -1,5 +1,7 @@
 package com.example.fingularium.adapters
 
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,19 @@ class VocabularyAdapter: RecyclerView.Adapter<VocabularyAdapter.MyViewHolder>(){
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.english_txt.text = myList[position][0].text
         holder.itemView.finnish_txt.text = myList[position][1].text
+        val URLname = myList[position][1].text
+        val URLlink = "https://en.wiktionary.org/wiki/" + URLname + "#Finnish"
+
+        holder.itemView.wiki.setText(Html.fromHtml(
+                "<b>text3:</b>  Text with a " +
+                        "<a href=\"+" +
+                        URLlink +
+                        "\">link</a> " +
+                        "created in the Java source code using HTML."));
+        holder.itemView.wiki.setMovementMethod(LinkMovementMethod.getInstance())
+
+
+
     }
 
     fun setData(newList: List<List<Word>>){

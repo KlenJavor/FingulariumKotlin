@@ -15,8 +15,6 @@ object TopicsSingleton  {
         return topics[i]
     }
 
-
-
     init {
         topics.add(TopicsItem("Uudenvuodenpuhe", 1919, 15, "President of the Republic Sauli Niinistö’s New Year’s Speech 2020\n", "Tasavallan presidentin uudenvuodenpuhe 2020", "uudenvuodenpuhe"))
         topics.add(TopicsItem("Maamme", 1931, 5, "Maamme -  Finland's national anthem", "Maamme -   Suomen kansallislaulu", "maamme"))
