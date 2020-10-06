@@ -7,7 +7,7 @@ package com.example.fingularium.model
 import java.util.*
 
 /**
- * Class has the constructor and getters to get info about a topic
+ * @Topic holds all metadata about the topic as title, reference to text and audio files
  */
 class Topic (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, val audio: String) {
 

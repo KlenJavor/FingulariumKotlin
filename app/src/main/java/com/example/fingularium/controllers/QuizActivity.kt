@@ -11,7 +11,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
-import com.example.fingularium.VocabularyRepository
+import com.example.fingularium.services.vocabularyRepository
 import com.example.fingularium.data.ResultsSingleton.results
 import com.example.fingularium.model.Question
 import com.example.fingularium.model.Result
@@ -20,25 +20,28 @@ import com.example.fingularium.viewmodel.MainViewModelFactory
 import com.example.fingularium.viewmodel.VocabularyViewModel
 import kotlinx.android.synthetic.main.activity_quiz.*
 
+/**
+ * @QuizActivity takes Words from Vocabulary, transforms them to Questions which are displayed to user.
+ * Quiz results are saved with Result class
+ */
+
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var viewModel: VocabularyViewModel
-    var wordIndex: Int = 0
-    var questionHeading = ""
-    lateinit var rightAnswer: String
-    lateinit var answers: MutableList<String>
-
-    //var results: MutableList<Result> = mutableListOf()
+    private var wordIndex: Int = 0
+    private var questionHeading = ""
+    private lateinit var rightAnswer: String
+    private lateinit var answers: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        // Retrieve json vocabulary into local variable jsonVocabulary
-        val repository = VocabularyRepository()
+        // Retrieve json vocabulary into local variable jsonVocabulary and if successful, play a quiz game with it
+        val repository = vocabularyRepository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(VocabularyViewModel::class.java)
-        viewModel.getCustomPosts()
+        viewModel.getVocabulary()
         viewModel.myVocabulary.observe(this, { response ->
             if (response.isSuccessful) {
                 val jsonVocabulary = response.body()
@@ -48,28 +51,26 @@ class QuizActivity : AppCompatActivity() {
             }
         })
 
-
+        // Display quiz results in a new activity on a button click
         statsButton.setOnClickListener {
             val intent = Intent(this@QuizActivity, ResultsActivity::class.java)
             intent.putExtra("stats", "results")
             this@QuizActivity.startActivity(intent)
             startActivity(intent)
         }
-
-
     }
 
+    // Make quizzes and respond to user choices
     private fun playGame(jsonVocabulary: List<List<Word>>?) {
 
         // 1. Build a question
         var vocQuestion = buildQuestion(jsonVocabulary)
 
-        // 3. Set first question
-        setQuestion(vocQuestion)
+        // 2. Set first question
+        displayQuestion(vocQuestion)
         results.add(Result(questionHeading, rightAnswer, 0, 0))
 
-        // 4. Display question
-        // Set the onClickListener for the submitButton
+        // 3. Display question + set onClickListener for the submitButton
         submitButton.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
             val checkedId = questionRadioGroup.checkedRadioButtonId
@@ -91,7 +92,7 @@ class QuizActivity : AppCompatActivity() {
 
                     // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
-                    setQuestion(vocQuestion)
+                    displayQuestion(vocQuestion)
 
                 } else {
                     // Give feedback
@@ -102,39 +103,43 @@ class QuizActivity : AppCompatActivity() {
 
                     // Advance to the next question
                     vocQuestion = buildQuestion(jsonVocabulary)
-                    setQuestion(vocQuestion)
+                    displayQuestion(vocQuestion)
                 }
             } else {
-                // Game over! A wrong answer sends us to the gameOverFragment.
-                submitButton.text = "That was wrong. Try next!"
+                // There should not be no else.
+                // Give feedback
+                textFeedback.text = "Something went wrong, sorry!"
             }
         }
     }
 
+    // Look at the answer of the randomly selected Word and find 3 other answers that are very similar
     private fun getClosestWord(wordIndex: Int, jsonVocabulary: List<List<Word>>?): MutableList<String> {
-        val distances: MutableMap<String, Int> = mutableMapOf()
+        val allDistances: MutableMap<String, Int> = mutableMapOf()
 
+        // Find distance between the correct answer and all other words in the vocabulary
         if (jsonVocabulary != null) {
             for (translation in jsonVocabulary) {
-                distances[translation[0].text] = jsonVocabulary[wordIndex][0].editDistance(translation[0])
+                allDistances[translation[0].text] = jsonVocabulary[wordIndex][0].editDistance(translation[0])
             }
         }
 
-        // remove identical words and get 3 closest translations
-        val sorted = distances.toList().sortedBy { (_, value) -> value }.toMap()
-        val cleaned = sorted.filter { (_, value) -> value > 0 }
-        val cropped = mutableListOf<String>()
+        // Remove identical words and return 3 closest translations
+        val sortedByDistance = allDistances.toList().sortedBy { (_, value) -> value }.toMap()
+        val removedDuplicates = sortedByDistance.filter { (_, value) -> value > 0 }
+        val threeAlternativeAnswers = mutableListOf<String>()
         for (i in 0..2) {
-            cropped.add(cleaned.keys.elementAt(i))
+            threeAlternativeAnswers.add(removedDuplicates.keys.elementAt(i))
         }
         if (jsonVocabulary != null) {
             Log.d("otazka", jsonVocabulary[wordIndex][0].text)
         }
-        Log.d("alternative answers", cropped.toString())
-        return cropped
+        Log.d("alternative answers", threeAlternativeAnswers.toString())
+        return threeAlternativeAnswers
     }
 
-    private fun setQuestion(vocQuestion: Question) {
+    // Display question in the QuizActivity
+    private fun displayQuestion(vocQuestion: Question) {
         // randomize the answers into a copy of the array
         answers = vocQuestion.answers.toMutableList()
         // and shuffle them
@@ -146,7 +151,9 @@ class QuizActivity : AppCompatActivity() {
         fourthAnswerRadioButton.text = answers[3]
     }
 
+    // Generates new question from Word in Vocabulary and alternative answers
     private fun buildQuestion(jsonVocabulary: List<List<Word>>?): Question {
+
         // 1. Pick a random word from the vocabulary
         if (jsonVocabulary != null) {
             wordIndex = (0..jsonVocabulary.size).shuffled().first()
@@ -162,10 +169,12 @@ class QuizActivity : AppCompatActivity() {
         return Question(text = questionHeading, answers = listOf(rightAnswer, cropped[0], cropped[1], cropped[2]))
     }
 
+    // Depending on what user answered, increase the number of passes or fails for particular question
     private fun updateResults(questionHeading: String, rightAnswer: String, passIncrease: Int, failIncrease: Int) {
+
         // is Result with the sme question already in the list?
         if (results.find { it == Result(questionHeading, rightAnswer, 0, 0) } != null) {
-            // add passes or fails
+            // if yes, add passes or fails
             val originalPasses = results.find { it == Result(questionHeading, rightAnswer, 0, 0) }!!.passes
             val originalFails = results.find { it == Result(questionHeading, rightAnswer, 0, 0) }!!.fails
             results.remove((Result(questionHeading, rightAnswer, 5, 0)))
@@ -175,7 +184,7 @@ class QuizActivity : AppCompatActivity() {
             Log.d("lookup", "result WAS found")
 
         } else {
-            // add it
+            // if not, add it
             results.add(Result(questionHeading, rightAnswer, passIncrease, failIncrease))
             Log.d("lookup", "result was not found")
         }

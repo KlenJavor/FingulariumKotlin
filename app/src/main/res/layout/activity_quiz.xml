@@ -13,144 +13,147 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-
-        <TextView
-            android:id="@+id/questionText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/question_horizontal_margin"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="@dimen/question_horizontal_margin"
-            android:text="@{game.currentQuestion.text}"
-            android:textColor="@color/boldfont"
-            android:textSize="@dimen/heading_text_size"
-            android:textStyle="bold"
-            android:typeface="normal"
-            app:fontFamily="@font/montserrat_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="What color is the Android mascot?" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
-            android:background="@android:color/white"
-            app:layout_constraintBottom_toTopOf="@+id/questionRadioGroup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questionText" />
-
-        <RadioGroup
-            android:id="@+id/questionRadioGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/question_horizontal_margin"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="@dimen/question_horizontal_margin"
-            android:layout_marginRight="32dp"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@+id/questionText">
-
-            <RadioButton
-                android:id="@+id/firstAnswerRadioButton"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/questionText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/question_vertical_margin"
-                android:checked="true"
-                android:text="@{game.answers[0]}"
+                android:layout_marginStart="@dimen/question_horizontal_margin"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="@dimen/question_horizontal_margin"
+                android:text="@{game.currentQuestion.text}"
                 android:textColor="@color/boldfont"
-                android:textSize="@dimen/answer_text_size"
-                app:fontFamily="@font/montserrat_regular"
-                tools:text="Blue" />
+                android:textSize="@dimen/heading_text_size"
+                android:textStyle="bold"
+                android:typeface="normal"
+                app:fontFamily="@font/montserrat_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="What color is the Android mascot?" />
 
-            <RadioButton
-                android:id="@+id/secondAnswerRadioButton"
-                android:layout_width="match_parent"
+            <View
+                android:id="@+id/divider"
+                android:layout_width="409dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="64dp"
+                android:background="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@+id/questionRadioGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+            <RadioGroup
+                android:id="@+id/questionRadioGroup"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/question_vertical_margin"
-                android:text="@{game.answers[1]}"
-                android:textColor="@color/boldfont"
-                android:textSize="@dimen/answer_text_size"
-                app:fontFamily="@font/montserrat_regular"
-                tools:text="Green" />
+                android:layout_marginStart="@dimen/question_horizontal_margin"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="@dimen/question_horizontal_margin"
+                android:layout_marginRight="32dp"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
 
-            <RadioButton
-                android:id="@+id/thirdAnswerRadioButton"
-                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionText">
+
+                <RadioButton
+                    android:id="@+id/firstAnswerRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/question_vertical_margin"
+                    android:checked="true"
+                    android:text="@{game.answers[0]}"
+                    android:textColor="@color/boldfont"
+                    android:textSize="@dimen/answer_text_size"
+                    app:fontFamily="@font/montserrat_regular"
+                    tools:text="Blue" />
+
+                <RadioButton
+                    android:id="@+id/secondAnswerRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/question_vertical_margin"
+                    android:text="@{game.answers[1]}"
+                    android:textColor="@color/boldfont"
+                    android:textSize="@dimen/answer_text_size"
+                    app:fontFamily="@font/montserrat_regular"
+                    tools:text="Green" />
+
+                <RadioButton
+                    android:id="@+id/thirdAnswerRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/question_vertical_margin"
+                    android:text="@{game.answers[2]}"
+                    android:textColor="@color/boldfont"
+                    android:textSize="@dimen/answer_text_size"
+                    app:fontFamily="@font/montserrat_regular"
+                    tools:text="Yellow" />
+
+                <RadioButton
+                    android:id="@+id/fourthAnswerRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.answers[3]}"
+                    android:textColor="@color/boldfont"
+                    android:textSize="@dimen/answer_text_size"
+                    app:fontFamily="@font/montserrat_regular"
+                    tools:text="Red" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/question_vertical_margin"
-                android:text="@{game.answers[2]}"
+                android:layout_marginStart="@dimen/question_horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/question_horizontal_margin"
+                android:background="@android:color/background_light"
+                android:text="@string/submit_button"
                 android:textColor="@color/boldfont"
-                android:textSize="@dimen/answer_text_size"
+                android:textSize="@dimen/button_text_size"
                 app:fontFamily="@font/montserrat_regular"
-                tools:text="Yellow" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionRadioGroup" />
 
-            <RadioButton
-                android:id="@+id/fourthAnswerRadioButton"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textFeedback"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{game.answers[3]}"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/feedback"
+                app:layout_constraintBottom_toTopOf="@+id/statsButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/submitButton" />
+
+            <Button
+                android:id="@+id/statsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@android:color/background_light"
+                android:text="@string/statistics"
                 android:textColor="@color/boldfont"
-                android:textSize="@dimen/answer_text_size"
+                android:textSize="@dimen/button_text_size"
                 app:fontFamily="@font/montserrat_regular"
-                tools:text="Red" />
-        </RadioGroup>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textFeedback"
+                app:layout_constraintVertical_bias="0.52" />
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/question_horizontal_margin"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:layout_marginEnd="@dimen/question_horizontal_margin"
-            android:background="@android:color/background_light"
-            android:text="@string/submit_button"
-            android:textColor="@color/boldfont"
-            android:textSize="@dimen/button_text_size"
-            app:fontFamily="@font/montserrat_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questionRadioGroup" />
-
-        <TextView
-            android:id="@+id/textFeedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/submitButton" />
-
-        <Button
-            android:id="@+id/statsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/statistics"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textFeedback"
-            app:layout_constraintVertical_bias="0.6" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 </LinearLayout>

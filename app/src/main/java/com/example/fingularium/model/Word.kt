@@ -6,6 +6,11 @@ package com.example.fingularium.model
 
 import android.util.Log
 
+/**
+ * @Word holds the basic structure for the vocabulary and questions.
+ * Important is collection translations which can hold several translations for the same word, e.g. in multiple languages
+ */
+
 data class Word(val lang:String, val text:String) {
     private var translations = mutableSetOf<Word>()
     var n:Int = 0

@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
 
+/**
+ * @MainActivity shows topic´s from which a user can choose in a listview
+ */
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

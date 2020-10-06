@@ -1,15 +1,16 @@
-package com.example.fingularium
+package com.example.fingularium.services
 
 /**
  * Created by Patricie Suppala, 1910042 in 2020.
  */
 
 import com.example.fingularium.model.Word
+import com.example.fingularium.services.VocabularyItem
 import retrofit2.Response
 
-class VocabularyRepository {
+class vocabularyRepository {
 
-    suspend fun getCustomPosts(): Response<List<List<Word>>> {
+    suspend fun getVocabulary(): Response<List<List<Word>>> {
         return VocabularyItem.api.getCustomPosts()
     }
 }

@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fingularium.R
 import com.example.fingularium.data.ResultsSingleton
-import com.example.fingularium.model.Result
 import kotlinx.android.synthetic.main.item_results.view.*
 
 /**
- * @Adapter sends data to the particular fields in the recyclerview whenever live data changes (that is observed in the ResultsActivity)
+ * @ResultsAdapter sends data to the particular fields in the recyclerview in the ResultsActivity which shows quiz statistics
  */
 
 class ResultsAdapter : RecyclerView.Adapter<ResultsAdapter.MyViewHolder>() {

@@ -3,7 +3,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +23,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Question"
+            android:text="@string/question"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light"
@@ -37,7 +36,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer"
+            android:text="@string/answer"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light"
@@ -58,7 +57,7 @@
             android:id="@+id/passes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Passes"
+            android:text="@string/passes"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light" />
@@ -67,7 +66,7 @@
             android:id="@+id/passNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
+            android:text="@string/_1"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light" />
@@ -85,7 +84,7 @@
             android:id="@+id/fails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fails"
+            android:text="@string/fails"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light" />
@@ -95,7 +94,7 @@
             android:id="@+id/failNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/_0"
             android:textColor="@color/thinfont"
             android:textSize="@dimen/answer_text_size"
             app:fontFamily="@font/montserrat_light" />

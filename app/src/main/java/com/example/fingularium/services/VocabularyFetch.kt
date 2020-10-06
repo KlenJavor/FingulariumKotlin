@@ -12,7 +12,17 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val BASE_URL = "https://users.metropolia.fi/~patricsu/Simple.json"
+/**
+ * @VocabularyFetch implement the retrofit functionality to get a json file from an online source
+ */
+
+class Constants {
+    companion object{
+        const val BASE_URL = "https://users.metropolia.fi/"
+    }
+}
+
+private const val BASE_URL = "https://users.metropolia.fi/~patricsu/Full_unform_200.json"
 
 private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -24,10 +34,9 @@ private val retrofit = Retrofit.Builder()
         .build()
 
 interface VocabularyService {
-    @GET("Simple")
+    @GET("Full_unform_200")
      fun getWords(): Deferred<List<Word>>
 }
-
 
 object VocabularyApi {
     val retrofitService: VocabularyService by lazy {

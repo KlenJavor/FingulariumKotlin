@@ -8,8 +8,9 @@ import com.example.fingularium.model.Topic
 import java.util.*
 
 /**
- * Anytime multiple classes request for Singleton, they get the same instance of topics (one and only one object)
- * Saves processing time as activity does not have to recreate e.g. when we turn the phone
+ * @ResultsSingleton is the single access point to the list of topics.
+ * Anytime multiple classes request for Singleton, they get the same instance of topics
+ *  Saves processing time as activity does not have to recreate e.g. when we turn the phone
  */
 
 object TopicsSingleton  {

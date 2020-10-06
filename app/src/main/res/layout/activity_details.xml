@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <Button
-        android:id="@+id/writeButton"
+        android:id="@+id/quizButton"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:background="@drawable/write_sm"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <Button
-        android:id="@+id/speakButton"
+        android:id="@+id/vocabularyButton"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:background="@drawable/speak_sm"
@@ -94,5 +94,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameTextView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/listen"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat_regular"
+        app:layout_constraintBottom_toTopOf="@+id/listenButton"
+        app:layout_constraintStart_toStartOf="@+id/listenButton" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat_regular"
+        app:layout_constraintBottom_toTopOf="@+id/readButton"
+        app:layout_constraintEnd_toEndOf="@+id/readButton" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quiz"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat_regular"
+        app:layout_constraintStart_toStartOf="@+id/quizButton"
+        app:layout_constraintTop_toBottomOf="@+id/quizButton" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vocabulary"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat_regular"
+        app:layout_constraintEnd_toEndOf="@+id/vocabularyButton"
+        app:layout_constraintTop_toBottomOf="@+id/vocabularyButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

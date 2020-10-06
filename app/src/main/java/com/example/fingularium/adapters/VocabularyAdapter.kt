@@ -12,7 +12,7 @@ import com.example.fingularium.model.Word
 import kotlinx.android.synthetic.main.item_vocabulary.view.*
 
 /**
- * @Adapter sends data to the particular fields in the recyclerview whenever live data changes (that is observed in the VocabularyActivity)
+ * @VocabularyAdapter sends data to the particular fields in the recyclerview in the VocaularyActivity which shows the available vocabulary
  */
 
 class VocabularyAdapter : RecyclerView.Adapter<VocabularyAdapter.MyViewHolder>() {
@@ -36,8 +36,8 @@ class VocabularyAdapter : RecyclerView.Adapter<VocabularyAdapter.MyViewHolder>()
         val nameURL = myList[position][0].text.replace(" ", "_")
         val wikiURL = "Wiki: https://en.wiktionary.org/wiki/$nameURL#Finnish"
         val bablaURL = "Babla: https://en.bab.la/dictionary/finnish-english/$nameURL"
-        holder.itemView.wiki.setText(wikiURL)
-        holder.itemView.babla.setText(bablaURL)
+        holder.itemView.wiki.text = wikiURL
+        holder.itemView.babla.text = bablaURL
     }
 
     fun setData(newList: List<List<Word>>) {

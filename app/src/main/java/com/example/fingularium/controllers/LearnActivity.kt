@@ -17,13 +17,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
 
-class LearnActivity : AppCompatActivity() {
+/**
+ * @LearnActivity shows topic´s text both in English and Finnish and allows to play audio at the same time
+ */
 
+class LearnActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var pauseCurrentPosition = 0
 
-
-    // Listen to scrolling - synchronous scrolling - https://developer.android.com/training/graphics/opengl/touch
+    // Listen to scrolling - synchronous scrolling - https://developer.android.com/training/graphics/opengl/touch - to be implemented
     /*override        fun onTouchEvent(e: MotionEvent): Boolean {
         when (e.action) {
             MotionEvent.ACTION_MOVE -> {
@@ -39,15 +41,14 @@ class LearnActivity : AppCompatActivity() {
         setContentView(R.layout.activity_learn)
         val play = findViewById<ImageButton>(R.id.readButton)
 
-        // Set variable for obtaining listview choice from main activity
+        // Set variable for obtaining topic chosen in the main activity
         val c = intent.extras
         val i = c?.getInt(MainActivity.EXTRA, 0) ?: 0
 
-        //Load song to media player
+        // Load song to media player
         val resId = resources.getIdentifier(TopicsSingleton.getTopic(i).audio, "raw", packageName)
         mediaPlayer = MediaPlayer.create(this@LearnActivity, resId)
         mediaPlayer?.isLooping = false
-
 
         // Set initial button for media player; pause or play
         if (mediaPlayer == null || !mediaPlayer!!.isPlaying) {
@@ -56,29 +57,26 @@ class LearnActivity : AppCompatActivity() {
             play.setImageResource(android.R.drawable.ic_media_pause)
         }
 
-        //Populate text views
-        //https://stackoverflow.com/questions/6945678/storing-r-drawable-ids-in-xml-array
-        //File title
+        // Populate text views
+        // Topic title
         (findViewById<View>(R.id.headingTextView) as TextView).text = TopicsSingleton.getTopic(i).getTitle()
-        //English Text
+        // English Text
         (findViewById<View>(R.id.enTextView) as TextView).movementMethod = ScrollingMovementMethod()
         val enArray = resources.obtainTypedArray(R.array.en_array)
         (findViewById<View>(R.id.enTextView) as TextView).setText(enArray.getResourceId(i, -1))
-        //Finnish Text
+        // Finnish Text
         (findViewById<View>(R.id.fiTextView) as TextView).movementMethod = ScrollingMovementMethod()
         val fiArray = resources.obtainTypedArray(R.array.fi_array)
         (findViewById<View>(R.id.fiTextView) as TextView).setText(fiArray.getResourceId(i, -1))
 
-
-
-
+        // Play audio on button click
         play.setOnClickListener {
             Log.d("testi", "i= $i")
             when {
                 mediaPlayer == null -> {
                     play.setImageResource(android.R.drawable.ic_media_pause)
 
-                    //this should be set to look up the song and time from shared preferences
+                    // This should be set to look up the song and time from shared preferences
                     val prefGet = getSharedPreferences("PlayerAndScrollState", Activity.MODE_PRIVATE)
                     pauseCurrentPosition = prefGet.getInt(TopicsSingleton.getTopic(i).audio + "_player", 0)
                     Log.d("testi", pauseCurrentPosition.toString())
@@ -114,7 +112,7 @@ class LearnActivity : AppCompatActivity() {
         }
     }
 
-    //this prevents playing on background
+    // Prevent playing on the background
     override fun onPause() {
 
         //add here use preference: if (user wishes no playing on background) {code below}
@@ -140,7 +138,7 @@ class LearnActivity : AppCompatActivity() {
         Log.d("test4", "onresume")
     }
 
-    //saves player state in case of screen orientation change
+    // Save player state in case of screen orientation change
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val c = intent.extras

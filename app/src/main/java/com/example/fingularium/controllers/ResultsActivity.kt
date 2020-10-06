@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fingularium.R
 import com.example.fingularium.adapters.ResultsAdapter
 
+/**
+ * @ResultsActivity displays results in a recycler view, using the ResultsAdapter
+ */
+
 class ResultsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
