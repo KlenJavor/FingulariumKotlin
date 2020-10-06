@@ -1,54 +1,31 @@
 package com.example.fingularium.view
 
-
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
 import com.example.fingularium.VocabularyRepository
+import com.example.fingularium.data.ResultsSingleton
+import com.example.fingularium.data.ResultsSingleton.results
+import com.example.fingularium.model.Question
+import com.example.fingularium.model.Result
 import com.example.fingularium.model.Word
 import com.example.fingularium.viewmodel.MainViewModelFactory
 import com.example.fingularium.viewmodel.VocabularyViewModel
 import kotlinx.android.synthetic.main.activity_quiz.*
-import java.util.*
 
 class QuizActivity : AppCompatActivity() {
-
-    // The first answer is the correct one.  We randomize the answers before showing the text.
-    // All questions must have four answers.
-    data class Question(
-            val text: String,
-            val answers: List<String>)
-
-   data class Result(
-            val question: String,
-            val answers: String,
-            val passes: Int,
-            val fails: Int)
-    {
-        override fun equals(other: Any?): Boolean {
-            if(this === other) return true
-            if(other == null || other.javaClass != this.javaClass) return false
-            val o = other as Result
-            return(this.question == o.question)
-        }
-        @RequiresApi(Build.VERSION_CODES.KITKAT)
-        override fun hashCode(): Int {
-            return Objects.hash(question)
-        }
-    }
 
     private lateinit var viewModel: VocabularyViewModel
     var wordIndex: Int = 0
     var questionHeading = ""
     lateinit var rightAnswer: String
     lateinit var answers: MutableList<String>
-    var results: MutableList<Result> = mutableListOf()
 
+    //var results: MutableList<Result> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +44,19 @@ class QuizActivity : AppCompatActivity() {
                 questionText.text = response.code().toString()
             }
         })
+
+
+       statsButton.setOnClickListener {
+           val intent = Intent(this@QuizActivity, ResultsActivity::class.java)
+           intent.putExtra("stats", "results")
+           this@QuizActivity.startActivity(intent)
+           startActivity(intent)
+        }
+
+
     }
 
-    fun playGame(jsonVocabulary: List<List<Word>>?) {
+    private fun playGame(jsonVocabulary: List<List<Word>>?) {
 
         // 1. Build a question
         var vocQuestion = buildQuestion(jsonVocabulary)
@@ -126,7 +113,7 @@ class QuizActivity : AppCompatActivity() {
 
         if (jsonVocabulary != null) {
             for (translation in jsonVocabulary) {
-                distances.put(translation[0].text, jsonVocabulary.get(wordIndex).get(0).editDistance(translation[0]))
+                distances[translation[0].text] = jsonVocabulary.get(wordIndex).get(0).editDistance(translation[0])
             }
         }
 
@@ -138,13 +125,13 @@ class QuizActivity : AppCompatActivity() {
             cropped.add(cleaned.keys.elementAt(i))
         }
         if (jsonVocabulary != null) {
-            Log.d("otazka", jsonVocabulary.get(wordIndex).get(0).text)
+            Log.d("otazka", jsonVocabulary[wordIndex].get(0).text)
         }
         Log.d("alternative answers", cropped.toString())
         return cropped
     }
 
-    private fun setQuestion(vocQuestion: QuizActivity.Question) {
+    private fun setQuestion(vocQuestion: Question) {
         // randomize the answers into a copy of the array
         answers = vocQuestion.answers.toMutableList()
         // and shuffle them
@@ -156,7 +143,7 @@ class QuizActivity : AppCompatActivity() {
         fourthAnswerRadioButton.text = answers[3]
     }
 
-    fun buildQuestion(jsonVocabulary: List<List<Word>>?): Question {
+    private fun buildQuestion(jsonVocabulary: List<List<Word>>?): Question {
         // 1. Pick a random word from the vocabulary
         if (jsonVocabulary != null) {
             wordIndex = (0..jsonVocabulary.size).shuffled().first()
@@ -168,17 +155,16 @@ class QuizActivity : AppCompatActivity() {
         Log.d("right answer", rightAnswer)
 
         // 2. Find alternative answers and build a question
-        var cropped = getClosestWord(wordIndex, jsonVocabulary)
-        var vocQuestion = Question(text = questionHeading, answers = listOf(rightAnswer, cropped[0], cropped[1], cropped[2]))
-        return vocQuestion
+        val cropped = getClosestWord(wordIndex, jsonVocabulary)
+        return Question(text = questionHeading, answers = listOf(rightAnswer, cropped[0], cropped[1], cropped[2]))
     }
 
-    fun updateResults(questionHeading: String, rightAnswer: String, passIncrease: Int, failIncrease: Int) {
+    private fun updateResults(questionHeading: String, rightAnswer: String, passIncrease: Int, failIncrease: Int) {
         // is Result with the sme question already in the list?
-        if (results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}  != null) {
+        if (results.find { it == Result(questionHeading, rightAnswer, 0, 0) } != null) {
             // add passes or fails
-            val originalPasses = results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}!!.passes
-            val originalFails = results.find { it.equals(Result(questionHeading, rightAnswer, 0, 0))}!!.fails
+            val originalPasses = results.find { it == Result(questionHeading, rightAnswer, 0, 0) }!!.passes
+            val originalFails = results.find { it == Result(questionHeading, rightAnswer, 0, 0) }!!.fails
             results.remove((Result(questionHeading, rightAnswer, 5, 0)))
             val newPasses = originalPasses + passIncrease
             val newFails = originalFails + failIncrease
@@ -193,3 +179,5 @@ class QuizActivity : AppCompatActivity() {
         Log.d("results", results.toString())
     }
 }
+
+

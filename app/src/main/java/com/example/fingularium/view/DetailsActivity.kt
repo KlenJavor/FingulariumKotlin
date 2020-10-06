@@ -74,7 +74,7 @@ class DetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //speak button aka full dictionary
+        //speak button aka full vocabulary
         speakButton.setOnClickListener {
             val intent = Intent(this@DetailsActivity, VocabularyActivity::class.java)
             intent.putExtra(MainActivity.EXTRA, i)
