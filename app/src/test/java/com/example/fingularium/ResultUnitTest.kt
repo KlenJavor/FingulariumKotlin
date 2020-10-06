@@ -8,22 +8,6 @@ import org.junit.Test
 
 class ResultUnitTests {
 
-    /*
-    var results: MutableSet<Result> = mutableSetOf()
-
-    val s1 = Result("questionHeading", "rightAnswer", 0, 0)
-    val s2= Result("questionHeading", "rightAnswer", 0, 1)
-
-    println(s1.equals(s2))
-    print(s1.hashCode())
-    println("")
-    print(s2.hashCode())
-
-    results.add(s1)
-    results.add(s2)
-    println("")
-    print (results.find { it.equals(Result("questionHeading", "wrong", 4, 5))})
-     */
     @Test
     fun createResult() {
         val r = Result("questionHeading", "rightAnswer", 0, 0)
