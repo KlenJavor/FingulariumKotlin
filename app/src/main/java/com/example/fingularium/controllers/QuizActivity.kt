@@ -1,4 +1,4 @@
-package com.example.fingularium.view
+package com.example.fingularium.controllers
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.R
 import com.example.fingularium.VocabularyRepository
-import com.example.fingularium.data.ResultsSingleton
 import com.example.fingularium.data.ResultsSingleton.results
 import com.example.fingularium.model.Question
 import com.example.fingularium.model.Result

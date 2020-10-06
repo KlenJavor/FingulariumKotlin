@@ -7,69 +7,88 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
->
-
-
-    <TextView
-        android:id="@+id/question"
-
-        android:layout_height="wrap_content"
-        android:text="Question"
-        android:textColor="@color/thinfont"
-        android:textSize="24sp"
-        app:fontFamily="@font/montserrat_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="wrap_content" />
-
-    <TextView
-        android:id="@+id/answer"
-
-        android:layout_height="wrap_content"
-        android:text="Answer"
-        android:textColor="@color/thinfont"
-        android:textSize="24sp"
-        app:fontFamily="@font/montserrat_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question"
-        android:layout_width="wrap_content" />
+    android:padding="4dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_width="251dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/answer"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question"
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light"
+            app:layout_constraintBottom_toTopOf="@+id/question"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/question"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Answer"
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/answer" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/passes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Passes"
-            android:textSize="24sp"
-            android:layout_width="wrap_content" />
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light" />
 
         <TextView
             android:id="@+id/passNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            android:textSize="24sp" />
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/fails"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fails"
-            android:textSize="24sp"
-            android:layout_width="wrap_content" />
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light" />
 
 
         <TextView
@@ -77,16 +96,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textSize="24sp" />
+            android:textColor="@color/thinfont"
+            android:textSize="@dimen/answer_text_size"
+            app:fontFamily="@font/montserrat_light" />
     </LinearLayout>
 
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_margin="4dp"
-        android:background="@color/icon"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

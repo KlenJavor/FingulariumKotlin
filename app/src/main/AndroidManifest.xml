@@ -14,30 +14,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.example.fingularium.view.MainActivity">
+        <activity android:name="com.example.fingularium.controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.fingularium.view.DetailsActivity"
-            android:parentActivityName="com.example.fingularium.view.MainActivity" />
+            android:name="com.example.fingularium.controllers.DetailsActivity"
+            android:parentActivityName="com.example.fingularium.controllers.MainActivity" />
         <activity
-            android:name="com.example.fingularium.view.LearnActivity"
-            android:parentActivityName="com.example.fingularium.view.DetailsActivity"
+            android:name="com.example.fingularium.controllers.LearnActivity"
+            android:parentActivityName="com.example.fingularium.controllers.DetailsActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.example.fingularium.view.QuizActivity"
-            android:parentActivityName="com.example.fingularium.view.DetailsActivity"
+            android:name="com.example.fingularium.controllers.QuizActivity"
+            android:parentActivityName="com.example.fingularium.controllers.DetailsActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.example.fingularium.view.VocabularyActivity"
-            android:parentActivityName="com.example.fingularium.view.DetailsActivity"
+            android:name="com.example.fingularium.controllers.VocabularyActivity"
+            android:parentActivityName="com.example.fingularium.controllers.DetailsActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.example.fingularium.view.ResultsActivity"
-            android:parentActivityName="com.example.fingularium.view.QuizActivity"
+            android:name="com.example.fingularium.controllers.ResultsActivity"
+            android:parentActivityName="com.example.fingularium.controllers.QuizActivity"
             android:label="@string/app_name" />
     </application>
 

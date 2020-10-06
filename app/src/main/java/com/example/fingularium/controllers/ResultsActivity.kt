@@ -1,4 +1,4 @@
-package com.example.fingularium.view
+package com.example.fingularium.controllers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

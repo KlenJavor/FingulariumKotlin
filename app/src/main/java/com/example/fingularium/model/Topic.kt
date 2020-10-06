@@ -1,11 +1,11 @@
-package com.example.fingularium.view
+package com.example.fingularium.model
 
 import java.util.*
 
 /**
  * Class has the constructor and getters to get info about a topic
  */
-class TopicsItem (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, val audio: String) {
+class Topic (private val title: String, private val lenght: Int, private val chapters: Int, val enName: String, val fiName: String, val audio: String) {
 
     fun getTitle(): String {
         return title.toUpperCase(Locale.ROOT)

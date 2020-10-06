@@ -1,4 +1,4 @@
-package com.example.fingularium.view
+package com.example.fingularium.controllers
 
 import android.content.Intent
 import android.media.MediaPlayer
