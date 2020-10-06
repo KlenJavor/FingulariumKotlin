@@ -1,5 +1,9 @@
 package com.example.fingularium
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import com.example.fingularium.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

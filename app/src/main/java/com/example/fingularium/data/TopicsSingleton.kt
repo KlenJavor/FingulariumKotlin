@@ -1,5 +1,9 @@
 package com.example.fingularium.data
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import com.example.fingularium.model.Topic
 import java.util.*
 

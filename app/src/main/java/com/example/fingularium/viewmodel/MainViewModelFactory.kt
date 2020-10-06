@@ -1,5 +1,9 @@
 package com.example.fingularium.viewmodel
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.fingularium.VocabularyRepository

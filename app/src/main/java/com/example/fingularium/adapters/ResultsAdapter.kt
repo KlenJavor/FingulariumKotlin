@@ -1,5 +1,9 @@
 package com.example.fingularium.adapters
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

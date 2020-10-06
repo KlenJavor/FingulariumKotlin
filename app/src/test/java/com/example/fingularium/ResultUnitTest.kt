@@ -1,5 +1,8 @@
 package com.example.fingularium
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
 
 import com.example.fingularium.data.ResultsSingleton.results
 import com.example.fingularium.model.Result

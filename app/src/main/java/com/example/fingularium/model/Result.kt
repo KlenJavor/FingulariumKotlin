@@ -1,5 +1,9 @@
 package com.example.fingularium.model
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi

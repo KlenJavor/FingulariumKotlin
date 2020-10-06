@@ -1,5 +1,9 @@
 package com.example.fingularium.controllers
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +13,7 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fingularium.R
 import com.example.fingularium.data.TopicsSingleton
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

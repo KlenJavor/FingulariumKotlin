@@ -1,5 +1,9 @@
 package com.example.fingularium.controllers
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

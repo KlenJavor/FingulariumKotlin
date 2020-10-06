@@ -1,5 +1,9 @@
 package com.example.fingularium.services;
 
+/**
+ * Created by Patricie Suppala, 1910042 in 2020.
+ */
+
 import com.example.fingularium.model.Word
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
