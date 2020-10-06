@@ -31,7 +31,22 @@
         android:textColor="@color/thinfont"
         android:textSize="16sp"
         app:fontFamily="@font/montserrat_light"
-        android:text="@string/wiktionary" />
+        android:text="@string/wiktionary"
+        android:autoLink="web"
+        android:linksClickable="true"
+        />
+
+    <TextView
+        android:id="@+id/babla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/thinfont"
+        android:textSize="16sp"
+        app:fontFamily="@font/montserrat_light"
+        android:text="@string/babla"
+        android:autoLink="web"
+        android:linksClickable="true"
+        />
 
     <View
         android:id="@+id/divider2"

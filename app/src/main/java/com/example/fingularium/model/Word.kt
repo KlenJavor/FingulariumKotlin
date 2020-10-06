@@ -34,13 +34,11 @@ data class Word(val lang:String, val text:String) {
         var cropped  = mutableListOf<String>()
 
         println("\nOrdering by distance...")
-        Log.d("sorted", sorted.toString())
 
         println ("\n\nPrinting out the $n closest translation in $lang language for $this")
         for (i in 0..n-1){
             cropped.add(sorted.keys.elementAt(i))
         }
-        Log.d("cropper", cropped.toString())
         return cropped
     }
 
